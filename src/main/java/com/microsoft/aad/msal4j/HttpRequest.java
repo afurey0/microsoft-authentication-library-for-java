@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import sun.net.www.protocol.https.Handler;
+
 /**
  * Contains information about outgoing HTTP request. Should be adapted to HTTP request for HTTP
  * client of choice
@@ -80,7 +82,7 @@ public class HttpRequest {
     private URL createUrlFromString(String stringUrl) {
         URL url;
         try {
-            url = new URL(stringUrl);
+            url = new URL(null, stringUrl, new sun.net.www.protocol.https.Handler());
         } catch (MalformedURLException e) {
             throw new MsalClientException(e);
         }
